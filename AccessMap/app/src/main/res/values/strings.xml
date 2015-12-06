@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DMap</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_setting">Cài đặt</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="title_activity_info">Thông tin về Dmap</string>
+    <string name="title_activity_search"></string>
+    <string name="title_activity_book_mark"></string>
+    <string name="title_activity_routes"></string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="title_activity_feedback">Thông tin phản hồi</string>
+    <string name="title_activity_tab_layout">Chi tiết</string>
+    <string name="title_activity_detail_and_feed_back_actitivty">Details</string>
+    <string name="title_activity_guide">Đo khả năng tiếp cận</string>
+    <string name="title_activity_add_feedback">Thêm phản hồi</string>
+    <string name="title_activity_drdstaff">Thêm điểm tiếp cận</string>
+    <string name="title_activity_end_user">Thêm điểm tiếp cận</string>
+    <string name="title_activity_tab_feedback">TabFeedbackActivity</string>
+    <string name="title_activity_tab_detail">Chi tiết địa điểm</string>
+    <string name="title_activity_drd__save_list"></string>
+    <string name="title_activity_end_user__save_list"></string>
+    <string name="search_label">Search</string>
+    <string name="search_hint">Search</string>
+    <string name="text_input_text">Nhập thông tin</string>
+    <string name="label_location_information">Thông tin địa điểm</string>
+    <string name="label_location_name">Tên địa điêm</string>
+    <string name="label_location_address">Địa chỉ</string>
+    <string name="label_location_phone">Số điện thoại</string>
+    <string name="label_username"></string>
+    <string name="label_password"></string>
+    <string name="label_userphone">Số điện thoại của bạn</string>
+    <string name="label_radius">Bán kính</string>
+    <string name="label_save_button">Lưu vào máy</string>
+    <string name="label_routes_button">Lộ trình</string>
+    <string name="label_post_button">Gửi cho admin</string>
+    <string name="label_motorbike_button">Xe máy</string>
+    <string name="label_bus_button">Xe buýt</string>
+    <string name="label_bookmark_button">Thêm vào danh sách</string>
+    <string name="label_update_button">Cập nhật dữ liệu</string>
+    <string name="label_share_button">Thêm điểm tiếp cận</string>
+    <string name="label_guide_button">Đo khả năng tiếp cận</string>
+    <string name="label_List_button">Danh sách địa điểm</string>
+    <string name="label_postAll_button">Gửi hết cho admin</string>
+    <string name="label_language">Ngôn ngữ</string>
+    <string name="label_from">Đi từ</string>
+    <string name="label_to">Đến</string>
+    <string name="label_find_route">Tìm lộ trình</string>
+    <string name="label_cancel_button">Huỷ</string>
+    <string name="label_current_position">Địa điểm của bạn</string>
+    <string name="alert_success_title">Thành công</string>
+    <string name="alert_save_data">Dữ liệu đã được lưu</string>
+    <string name="alert_adding_success">Địa điểm đã được thêm vào danh sách</string>
+</resources>

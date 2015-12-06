@@ -1,0 +1,1 @@
+keytool.exe -list -v -alias trangson -keystore "C:\1.DATA\4.TEMP\AccessMap\GoogleStore\tskeystore.jks" -storepass "123456" -keypass "123456"

@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.pham.accessmap.DRDStaffActivity">
+
+    <TextView
+        android:id="@+id/en_location"
+        android:text="    Location Info" android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/gray"
+        android:background="@color/genre"
+        android:gravity="left|center"
+        android:textSize="16dp"
+        />
+    <EditText
+        android:id="@+id/endUser_locationName"
+        android:layout_below="@+id/en_location"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Location Name"/>
+
+    <EditText
+        android:id="@+id/endUser_locationPhone"
+        android:layout_below="@+id/endUser_locationName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:inputType="phone"
+        android:hint="Location Phone"/>
+
+    <EditText
+        android:id="@+id/endUser_locationAdd"
+        android:layout_below="@+id/endUser_locationPhone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:hint="Location Address"/>
+
+    <TextView
+        android:id="@+id/endUser_locationType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:text="  Location Type"
+        android:layout_below="@+id/endUser_locationAdd"
+        android:textSize="16dp"
+        />
+    <Spinner
+        android:id="@+id/endUser_selectLocationType"
+        android:gravity="center_horizontal"
+
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/endUser_locationAdd"
+        android:layout_alignParentRight="true">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/endUser_accessType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="5dp"
+        android:text="  Accessibility Type"
+        android:layout_below="@+id/endUser_selectLocationType"
+        android:textSize="16dp"
+        />
+
+    <com.pham.accessmap.Object.MultiSelectionSpinner
+        android:id="@+id/endUser_spinnerAccess"
+        android:layout_below="@+id/endUser_selectLocationType"
+        android:layout_alignParentRight="true"
+        android:gravity="left|top"
+        android:layout_marginTop="12dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"></com.pham.accessmap.Object.MultiSelectionSpinner>
+
+    <TextView
+        android:id="@+id/entv_personal"
+        android:text="   Personal Info"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:textColor="@color/gray"
+        android:background="@color/genre"
+        android:gravity="left|center"
+        android:layout_below="@+id/endUser_accessType"
+        android:textSize="16dp"/>
+
+    <EditText
+        android:id="@+id/endUser_UserName"
+        android:layout_below="@+id/entv_personal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:inputType="phone"
+        android:hint="User Phone"/>
+
+    <Button
+        android:id="@+id/btn_Post"
+        android:text="Post"
+        android:textColor="@color/iOS"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/endUser_UserName"
+        android:layout_width="150dp"
+        android:background="@color/gray"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_enPost"/>
+
+    <Button
+        android:id="@+id/btn_Save"
+        android:text="Save"
+        android:textColor="@color/iOS"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/endUser_UserName"
+        android:layout_width="150dp"
+        android:background="@color/gray"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/btn_Post"
+        android:onClick="onClick_enSave"/>
+
+
+</RelativeLayout>

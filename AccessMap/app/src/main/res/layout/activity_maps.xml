@@ -1,0 +1,105 @@
+
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:id="@+id/title"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_weight="0">
+
+        <ImageButton
+            android:id="@+id/btnRoute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/direction"
+            android:onClick="onClick_Routes"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            />
+
+        <SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borderline"
+            android:onClick="onClick_Search"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            >
+        </SearchView>
+
+        <ImageButton
+            android:id="@+id/btnBookmark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/book_mark2"
+            android:onClick="onClick_BookMark"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/mapContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1">
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_weight="0">
+        <ImageButton
+            android:id="@+id/btnSetting"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:background="@drawable/settings"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:onClick="onClick_Setting"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/btnInfo"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/info"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:onClick="onClick_Info"
+            android:layout_marginRight="10dp"
+            />
+
+        <ImageButton
+            android:id="@+id/btnReload"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/refresh"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:onClick="onClick_Reload"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pham.accessmap.TabDetailActivity">
+
+    <LinearLayout
+        android:id="@+id/tab_detail"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:id="@+id/locationTitle"
+            android:textColor="@color/iOS"
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/locationAddress"
+            />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/locationPhone"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/label_motorbike_button"
+                android:textAllCaps="false"
+                android:textSize="9dp"
+                android:textColor="@color/iOS"
+                android:drawableLeft="@drawable/motorbike"
+                android:onClick="onClick_findBikeRoute"
+                />
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
+                android:text="@string/label_bus_button"
+                android:textSize="10dp"
+                android:textColor="@color/iOS"
+                android:drawableLeft="@drawable/bus40"
+                android:onClick="onClick_findBusRoute"/>
+
+            <Button
+                android:id="@+id/btn_Bookmark"
+                android:layout_width="100dp"
+                android:layout_height="48dp"
+                android:textAllCaps="false"
+                android:text="@string/label_bookmark_button"
+                android:textSize="10dp"
+                android:textColor="@color/iOS"
+                android:onClick="onClick_addBookmark"
+                android:drawableLeft="@drawable/book_markdt"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:divider="@color/list_divider"
+            android:dividerHeight="1dp"
+            android:layout_marginTop="5dp"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

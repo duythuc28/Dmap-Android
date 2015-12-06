@@ -1,0 +1,120 @@
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tabhost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.pham.accessmap.TabLayoutActivity">
+    <RelativeLayout
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_alignParentBottom="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@+id/tab_detail"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/locationTitle"
+                    android:textColor="@color/iOS"
+                    />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/locationAddress"
+                    />
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/locationPhone"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <Button
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="Motorbike"
+                        android:textAllCaps="false"
+                        android:textSize="9dp"
+                        android:textColor="@color/iOS"
+                        android:drawableLeft="@drawable/motorbike"
+                        android:onClick="onClick_findBikeRoute"
+                        />
+
+                    <Button
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="20dp"
+                        android:text="Bus"
+                        android:textSize="10dp"
+                        android:textColor="@color/iOS"
+                        android:drawableLeft="@drawable/bus40"
+                        android:onClick="onClick_findBusRoute"/>
+
+                    <Button
+                        android:layout_width="100dp"
+                        android:layout_height="48dp"
+                        android:textAllCaps="false"
+                        android:text="Favourite"
+                        android:textSize="10dp"
+                        android:textColor="@color/iOS"
+                        android:drawableLeft="@drawable/book_markdt"/>
+
+                </LinearLayout>
+
+                <ListView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listView"
+                    android:divider="@color/list_divider"
+                    android:dividerHeight="1dp"
+                    android:layout_marginTop="5dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/tab_feedback"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <ListView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/feedback_listView"
+                    android:layout_marginTop="5dp" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+</TabHost>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+<ImageButton
+    android:id="@+id/switch_route"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:background="@drawable/search_icon"/>
+    <TextView
+        android:id="@+id/from_label"
+        android:layout_width="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_from"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/switch_route"
+        />
+    <TextView
+        android:id="@+id/to_label"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_to"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/from_label"
+        android:layout_toRightOf="@+id/switch_route"/>
+    <TextView
+        android:id="@+id/from_route"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/from_label"
+        android:text="Current Position"
+        android:textColor="@color/iOS"/>
+    <TextView
+        android:id="@+id/to_route"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/from_route"
+        android:layout_toRightOf="@+id/to_label"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:text="TEst"
+        android:textColor="@color/iOS"/>
+    <Button
+        android:id="@+id/find_route"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/switch_route"
+        android:text="@string/label_routes_button"
+        android:textColor="@color/iOS"/>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/switch_route"
+        android:text="@string/label_cancel_button"
+        android:layout_toRightOf="@+id/find_route"
+        android:textColor="@color/iOS"/>
+</RelativeLayout>
