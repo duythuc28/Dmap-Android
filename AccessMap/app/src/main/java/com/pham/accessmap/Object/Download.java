@@ -209,7 +209,6 @@ public class Download  {
                 }
 
             }
-
             SharedPreferences.Editor editor = mcontext.getSharedPreferences("TIME",0).edit();
             editor.clear();
             editor.putInt("time", getTime);

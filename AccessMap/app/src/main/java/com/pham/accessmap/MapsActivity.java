@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.pham.accessmap.Model.DirectionParser;
 import com.pham.accessmap.Object.BusDirectionJSONParser;
 import com.pham.accessmap.Object.BusObject;
 import com.pham.accessmap.Object.DataHelper;
@@ -473,21 +474,22 @@ public class MapsActivity extends FragmentActivity {
     /**
      * A class to parse the Google Places in JSON format
      */
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+    private class ParserTask extends AsyncTask<String, Integer, List<DirectionParser>> {
 
         // Parsing the data in non-ui thread
         @Override
-        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+        protected List<DirectionParser> doInBackground(String... jsonData) {
 
             JSONObject jObject;
-            List<List<HashMap<String, String>>> routes = null;
+            List<DirectionParser> routes = null;
 
             try {
                 jObject = new JSONObject(jsonData[0]);
                 DirectionJSONParser parser = new DirectionJSONParser();
 
                 // Starts parsing data
-                routes = parser.parse(jObject);
+//                routes = parser.parse(jObject);
+                routes = parser.parsed(jObject);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -496,7 +498,7 @@ public class MapsActivity extends FragmentActivity {
 
         // Executes in UI thread, after the parsing process
         @Override
-        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+        protected void onPostExecute(List<DirectionParser> result) {
             ArrayList<LatLng> points = null;
 
             if (lineOptions != null) {
@@ -519,21 +521,21 @@ public class MapsActivity extends FragmentActivity {
             Bitmap tBitMap = BitmapFactory.decodeResource(getResources(), R.drawable.motorcycle);
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(origin);
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(tBitMap.createScaledBitmap(tBitMap,120,139,false)));
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(tBitMap.createScaledBitmap(tBitMap, 120, 139, false)));
+            markerOptions.title(getResources().getString(R.string.label_motorbike_button));
+            DirectionParser tDirectionParser = result.get(0);
+            markerOptions.snippet(tDirectionParser.mDistance);
             marker = mMap.addMarker(markerOptions);
-
-
-            // Traversing through all the routes
-            for (int i = 0; i < result.size(); i++) {
+            for (DirectionParser directionParser : result) {
                 points = new ArrayList<LatLng>();
                 lineOptions = new PolylineOptions();
 
                 // Fetching i-th route
-                List<HashMap<String, String>> path = result.get(i);
+//                List<HashMap<String, String>> path = result.get(i);
 
                 // Fetching all the points in i-th route
-                for (int j = 0; j < path.size(); j++) {
-                    HashMap<String, String> point = path.get(j);
+                for (int j = 0; j < directionParser.mListLocations.size(); j++) {
+                    HashMap<String, String> point = directionParser.mListLocations.get(j);
 
                     double lat = Double.parseDouble(point.get("lat"));
                     double lng = Double.parseDouble(point.get("lng"));
@@ -546,8 +548,33 @@ public class MapsActivity extends FragmentActivity {
                 lineOptions.addAll(points);
                 lineOptions.width(5);
                 lineOptions.color(Color.RED);
-
             }
+
+            // Traversing through all the routes
+//            for (int i = 0; i < result.size(); i++) {
+//                points = new ArrayList<LatLng>();
+//                lineOptions = new PolylineOptions();
+//
+//                // Fetching i-th route
+//                List<HashMap<String, String>> path = result.get(i);
+//
+//                // Fetching all the points in i-th route
+//                for (int j = 0; j < path.size(); j++) {
+//                    HashMap<String, String> point = path.get(j);
+//
+//                    double lat = Double.parseDouble(point.get("lat"));
+//                    double lng = Double.parseDouble(point.get("lng"));
+//                    //Log.v("test",String.valueOf(lat));
+//                    LatLng position = new LatLng(lat, lng);
+//                    points.add(position);
+//                }
+//
+//                // Adding all the points in the route to LineOptions
+//                lineOptions.addAll(points);
+//                lineOptions.width(5);
+//                lineOptions.color(Color.RED);
+//
+//            }
 
             // Drawing polyline in the Google Map for the i-th route
             polyline = mMap.addPolyline(lineOptions);
