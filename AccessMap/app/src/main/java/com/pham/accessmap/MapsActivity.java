@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.pham.accessmap.Model.BusDirectionParser;
 import com.pham.accessmap.Model.DirectionParser;
 import com.pham.accessmap.Object.BusDirectionJSONParser;
 import com.pham.accessmap.Object.BusObject;
@@ -70,6 +71,8 @@ public class MapsActivity extends FragmentActivity {
     PolylineOptions busLine = null;
     Polyline busPolyline;
     List<Marker> listMarker;
+    List<Polyline> mPolylines;
+    List<Marker> mBusMarkers;
     private static final int GOOGLE_MAP_BOUND_PADDING = 200;
 
     private Map<Marker, MapMarker> allMarkersMap = new HashMap<Marker, MapMarker>();
@@ -83,7 +86,7 @@ public class MapsActivity extends FragmentActivity {
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
         isFirstTime = prefs.getBoolean("isFirstTime", true);
         activity = this;
-        if (isFirstTime == true) {
+        if (isFirstTime) {
             // set language
             Locale locale = new Locale("vi_VN");
             Locale.setDefault(locale);
@@ -103,6 +106,7 @@ public class MapsActivity extends FragmentActivity {
             editor.putBoolean("isFirstTime", false);
             editor.commit();
         }
+
 
         setUpMapIfNeeded();
 
@@ -501,22 +505,30 @@ public class MapsActivity extends FragmentActivity {
         protected void onPostExecute(List<DirectionParser> result) {
             ArrayList<LatLng> points = null;
 
-            if (lineOptions != null) {
+
+            if (lineOptions != null && polyline != null && marker != null) {
                 polyline.remove();
                 lineOptions = null;
                 marker.remove();
             }
 
-            if (busLine != null) {
-                busLine = null;
-                marker.remove();
-                busPolyline.remove();
+            if (mPolylines != null) {
+                for (Polyline tPolyline : mPolylines) {
+                    tPolyline.remove();
+                }
+                mPolylines.clear();
+            }
+
+            if (mBusMarkers != null) {
+                for (Marker tMaker : mBusMarkers) {
+                    tMaker.remove();
+                }
+                mBusMarkers.clear();
             }
 
             //MarkerOptions markerOptions = new MarkerOptions();
             markerPoints.add(origin);
             markerPoints.add(destination);
-
 
             Bitmap tBitMap = BitmapFactory.decodeResource(getResources(), R.drawable.motorcycle);
             MarkerOptions markerOptions = new MarkerOptions();
@@ -549,32 +561,6 @@ public class MapsActivity extends FragmentActivity {
                 lineOptions.width(5);
                 lineOptions.color(Color.RED);
             }
-
-            // Traversing through all the routes
-//            for (int i = 0; i < result.size(); i++) {
-//                points = new ArrayList<LatLng>();
-//                lineOptions = new PolylineOptions();
-//
-//                // Fetching i-th route
-//                List<HashMap<String, String>> path = result.get(i);
-//
-//                // Fetching all the points in i-th route
-//                for (int j = 0; j < path.size(); j++) {
-//                    HashMap<String, String> point = path.get(j);
-//
-//                    double lat = Double.parseDouble(point.get("lat"));
-//                    double lng = Double.parseDouble(point.get("lng"));
-//                    //Log.v("test",String.valueOf(lat));
-//                    LatLng position = new LatLng(lat, lng);
-//                    points.add(position);
-//                }
-//
-//                // Adding all the points in the route to LineOptions
-//                lineOptions.addAll(points);
-//                lineOptions.width(5);
-//                lineOptions.color(Color.RED);
-//
-//            }
 
             // Drawing polyline in the Google Map for the i-th route
             polyline = mMap.addPolyline(lineOptions);
@@ -622,105 +608,98 @@ public class MapsActivity extends FragmentActivity {
     /**
      * A class to parse the Google Places in JSON format
      */
-    private class ParserBusTask extends AsyncTask<String, Integer, List<List<BusObject>>> {
+    private class ParserBusTask extends AsyncTask<String, Integer, List<BusDirectionParser>> {
 
         // Parsing the data in non-ui thread
         @Override
-        protected List<List<BusObject>> doInBackground(String... jsonData) {
+        protected List<BusDirectionParser> doInBackground(String... jsonData) {
 
             JSONObject jObject;
-            List<List<BusObject>> routes = null;
+            List<BusDirectionParser> routes = null;
 
             try {
                 jObject = new JSONObject(jsonData[0]);
                 BusDirectionJSONParser parser = new BusDirectionJSONParser();
 
                 // Starts parsing data
-                routes = parser.parse(jObject);
+//                routes = parser.parse(jObject);
+                routes = parser.parseBusJSON(jObject);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return routes;
         }
 
-        // Executes in UI thread, after the parsing process
         @Override
-        protected void onPostExecute(List<List<BusObject>> result) {
+        protected void onPostExecute(List<BusDirectionParser> result) {
+            super.onPostExecute(result);
             ArrayList<LatLng> points = null;
-            ArrayList<LatLng> busPoints = null;
 
-            if (lineOptions != null) {
-
-                polyline.remove();
+            if (lineOptions != null && mPolylines != null && mBusMarkers != null) {
+                for (Polyline tPolyline : mPolylines) {
+                    tPolyline.remove();
+                }
+                for (Marker tMarker : mBusMarkers) {
+                    tMarker.remove();
+                }
+                mBusMarkers.clear();
+                mPolylines.clear();
                 lineOptions = null;
+            }
+
+            if (polyline != null) {
+                polyline.remove();
+            }
+
+            if (marker != null) {
                 marker.remove();
             }
 
-            if (busLine != null) {
-                marker.remove();
-                busPolyline.remove();
-                busLine = null;
-                //polyline.remove();
-                //lineOptions = null;
-            }
-
+            //MarkerOptions markerOptions = new MarkerOptions();
             markerPoints.add(origin);
             markerPoints.add(destination);
-            Bitmap tBitMap = BitmapFactory.decodeResource(getResources(), R.drawable.bus);
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(origin);
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(tBitMap.createScaledBitmap(tBitMap,120,139,false)));
-            marker = mMap.addMarker(markerOptions);
 
-            // Traversing through all the routes
-            for (int i = 0; i < result.size(); i++) {
+            mPolylines  = new ArrayList<>();
+            mBusMarkers = new ArrayList<>();
+
+            for (BusDirectionParser busDirectionParser : result) {
                 points = new ArrayList<LatLng>();
-                busPoints = new ArrayList<LatLng>();
-
                 lineOptions = new PolylineOptions();
-                busLine = new PolylineOptions();
-                // Fetching i-th route
-                List<BusObject> path = result.get(i);
 
                 // Fetching all the points in i-th route
-                for (int j = 0; j < path.size(); j++) {
-                    BusObject busObject = path.get(j);
+                for (int j = 0; j < busDirectionParser.mListLocations.size(); j++) {
+                    HashMap<String, String> point = busDirectionParser.mListLocations.get(j);
 
-                    for (int k = 0; k < busObject.hashMapList.size(); k++) {
-                        HashMap<String, String> point = busObject.hashMapList.get(k);
-                        double lat = Double.parseDouble(point.get("lat"));
-                        double lng = Double.parseDouble(point.get("lng"));
-                        LatLng position = new LatLng(lat, lng);
-                        points.add(position);
-                        //Log.v("test",String.valueOf(lat));
-                    }
-
-                    for (int k = 0; k < busObject.busMapList.size(); k++) {
-                        HashMap<String, String> point = busObject.busMapList.get(k);
-                        double lat = Double.parseDouble(point.get("lat"));
-                        double lng = Double.parseDouble(point.get("lng"));
-                        LatLng position = new LatLng(lat, lng);
-                        busPoints.add(position);
-
-                        //Log.v("test",String.valueOf(lat));
-                    }
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    //Log.v("test",String.valueOf(lat));
+                    LatLng position = new LatLng(lat, lng);
+                    points.add(position);
                 }
-
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(busDirectionParser.getmStartLocation());
                 // Adding all the points in the route to LineOptions
-//                if (busObject.isWalking == true
-
-                busLine.addAll(busPoints);
-                busLine.width(5);
-                busLine.color(Color.RED);
-
+                if (busDirectionParser.mIsBus) {
+                    lineOptions.color(Color.BLUE);
+                    Bitmap tBitMap = BitmapFactory.decodeResource(getResources(), R.drawable.bus);
+                    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(tBitMap.createScaledBitmap(tBitMap, 120, 139, false)));
+                    markerOptions.title(getResources().getString(R.string.label_bus_button));
+                    markerOptions.snippet(busDirectionParser.getmBusNumber());
+                } else {
+                    lineOptions.color(Color.GREEN);
+                    Bitmap tBitMap = BitmapFactory.decodeResource(getResources(), R.drawable.walking);
+                    markerOptions.icon(BitmapDescriptorFactory.fromBitmap(tBitMap.createScaledBitmap(tBitMap, 120, 139, false)));
+                    markerOptions.title(getResources().getString(R.string.marker_title_walking));
+                    markerOptions.snippet(busDirectionParser.mDistance);
+                }
+                mBusMarkers.add(mMap.addMarker(markerOptions));
                 lineOptions.addAll(points);
                 lineOptions.width(5);
-                lineOptions.color(Color.BLUE);
+//                polyline = mMap.addPolyline(lineOptions);
+                mPolylines.add(mMap.addPolyline(lineOptions));
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            polyline = mMap.addPolyline(lineOptions);
-            busPolyline = mMap.addPolyline(busLine);
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             builder.include(origin);
             builder.include(destination);
@@ -728,5 +707,4 @@ public class MapsActivity extends FragmentActivity {
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, GOOGLE_MAP_BOUND_PADDING));
         }
     }
-
 }

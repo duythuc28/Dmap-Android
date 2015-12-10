@@ -1,6 +1,9 @@
 package com.pham.accessmap.Object;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
+import com.pham.accessmap.Model.BusDirectionParser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,7 +80,8 @@ public class BusDirectionJSONParser {
             for(int i=0;i<jRoutes.length();i++){
                 jLegs = ( (JSONObject)jRoutes.get(i)).getJSONArray("legs");
                 List path = new ArrayList<BusObject>();
-
+                BusObject busObject = new BusObject();
+                busObject.mDistance = (String)((JSONObject)((JSONObject)jLegs.get(0)).get("distance")).get("text");
                 /** Traversing all legs */
                 for(int j=0;j<jLegs.length();j++){
                     jSteps = ( (JSONObject)jLegs.get(j)).getJSONArray("steps");
@@ -86,14 +90,12 @@ public class BusDirectionJSONParser {
                     for(int k=0;k<jSteps.length();k++){
 
 
-                        BusObject busObject = new BusObject();
+
                         busObject.hashMapList = new ArrayList<HashMap<String, String>>();
                         busObject.busMapList = new ArrayList<HashMap<String, String>>();
 
                         String travelMode = "";
                         travelMode = (String)(((JSONObject)jSteps.get(k)).get("travel_mode"));
-
-
 
                         if (travelMode.equals ("WALKING") || travelMode.equals ("TRANSIT") ) {
                             busObject.isWalking = true;
@@ -140,6 +142,74 @@ public class BusDirectionJSONParser {
 
         return routes;
     }
+
+    public List <BusDirectionParser> parseBusJSON (JSONObject jObject) {
+        List<BusDirectionParser> routes = new ArrayList<>() ;
+        JSONArray jRoutes = null;
+        JSONArray jLegs = null;
+        JSONArray jSteps = null;
+
+        try {
+
+            jRoutes = jObject.getJSONArray("routes");
+
+            /** Traversing all routes */
+            for(int i=0;i<jRoutes.length();i++){
+                jLegs = ( (JSONObject)jRoutes.get(i)).getJSONArray("legs");
+//                tDirectionParser.mDistance = (String)((JSONObject)((JSONObject)jLegs.get(0)).get("distance")).get("text");
+
+                /** Traversing all legs */
+                for(int j=0;j<jLegs.length();j++){
+                    jSteps = ( (JSONObject)jLegs.get(j)).getJSONArray("steps");
+
+
+                    /** Traversing all steps */
+                    for(int k=0;k<jSteps.length();k++) {
+                        BusDirectionParser tDirectionParser = new BusDirectionParser();
+                        tDirectionParser.mListLocations = new ArrayList<>();
+                        tDirectionParser.mDistance = (String) ((JSONObject) ((JSONObject) jSteps.get(k)).get("distance")).get("text");
+                        String travelMode = "";
+                        travelMode = (String) (((JSONObject) jSteps.get(k)).get("travel_mode"));
+                        if (travelMode.equals("TRANSIT")) {
+                            tDirectionParser.mIsBus = true;
+                            String tBusLine = (String)((JSONObject)((JSONObject) ((JSONObject) jSteps.get(k)).get("transit_details")).get("line")).get("name");
+                            tDirectionParser.setmBusNumber(tBusLine);
+                        } else {
+                            tDirectionParser.mIsBus = false;
+                        }
+
+                        double tLatitude = (Double) ((JSONObject) ((JSONObject) jSteps.get(k)).get("start_location")).get("lat");
+                        double tLongitude = (Double) ((JSONObject) ((JSONObject) jSteps.get(k)).get("start_location")).get("lng");
+
+                        tDirectionParser.setmStartLocation(new LatLng(tLatitude,tLongitude));
+
+                        String polyline = "";
+                        polyline = (String) ((JSONObject) ((JSONObject) jSteps.get(k)).get("polyline")).get("points");
+                        List<LatLng> list = decodePoly(polyline);
+
+                        /** Traversing all points */
+                        for (int l = 0; l < list.size(); l++) {
+                            HashMap<String, String> hm = new HashMap<String, String>();
+                            hm.put("lat", Double.toString(((LatLng) list.get(l)).latitude));
+                            hm.put("lng", Double.toString(((LatLng) list.get(l)).longitude));
+                            tDirectionParser.mListLocations.add(hm);
+                        }
+                        routes.add(tDirectionParser);
+                    }
+                }
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }catch (Exception e){
+            Log.e("Error","Error");
+            e.printStackTrace();
+        }
+
+        return routes;
+    }
+
+
     /**
      * Method to decode polyline points
      * Courtesy : http://jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java

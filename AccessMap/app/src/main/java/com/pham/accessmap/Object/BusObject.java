@@ -13,5 +13,5 @@ public class BusObject {
     public HashMap <String , String> hashMap;
     public List<HashMap<String,String>> hashMapList;
     public List<HashMap<String, String>> busMapList;
-
+    public String mDistance;
 }
