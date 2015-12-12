@@ -19,6 +19,7 @@ public class Download  {
     static String API_GET_ACCESSTYPE = "http://www.drdvietnam.org/bandotiepcan/api/get/access_types?Time=";
 
     private Context mcontext;
+    public static final String PREFS_NAME = "MyPref";
 
 
     public  Download (Context context)
@@ -57,7 +58,7 @@ public class Download  {
     public void getLocationType() {
 
         //ServiceHandler sh = new ServiceHandler();
-        SharedPreferences prefs = mcontext.getSharedPreferences("TIME",0);
+        SharedPreferences prefs = mcontext.getSharedPreferences(PREFS_NAME,0);
         String uri;
         String json;
 
@@ -106,7 +107,7 @@ public class Download  {
 
         // Making a request to url and getting response
 
-        SharedPreferences prefs = mcontext.getSharedPreferences("TIME",0);
+        SharedPreferences prefs = mcontext.getSharedPreferences(PREFS_NAME,0);
         String uri;
         String json;
         int time = prefs.getInt("time",0);
@@ -153,7 +154,7 @@ public class Download  {
 
     public void getLocation() {
         //ServiceHandler sh = new ServiceHandler();
-        SharedPreferences prefs = mcontext.getSharedPreferences("TIME",0);
+        SharedPreferences prefs = mcontext.getSharedPreferences(PREFS_NAME,0);
         String uri;
         String json;
         int time = prefs.getInt("time", 0);
@@ -209,7 +210,7 @@ public class Download  {
                 }
 
             }
-            SharedPreferences.Editor editor = mcontext.getSharedPreferences("TIME",0).edit();
+            SharedPreferences.Editor editor = mcontext.getSharedPreferences(PREFS_NAME,0).edit();
             editor.clear();
             editor.putInt("time", getTime);
             editor.commit();

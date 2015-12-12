@@ -25,6 +25,7 @@ import com.pham.accessmap.Object.DataHelper;
 import com.pham.accessmap.Object.DirectionJSONParser;
 import com.pham.accessmap.Object.Download;
 import com.pham.accessmap.Object.GPSTracker;
+import com.pham.accessmap.Object.LanguageHelper;
 import com.pham.accessmap.Object.LocMarker;
 import com.pham.accessmap.Object.MapMarker;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,8 +60,6 @@ public class MapsActivity extends FragmentActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private Circle circle;
     private Marker marker;
-    private Download download;
-    private boolean isFirstTime;
     public static Activity activity;
     GPSTracker gpsTracker;
     PolylineOptions lineOptions = null;
@@ -84,32 +83,22 @@ public class MapsActivity extends FragmentActivity {
         markerPoints = new ArrayList<LatLng>();
         fixNetworkOnMainThreadException();
         SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        isFirstTime = prefs.getBoolean("isFirstTime", true);
+        boolean isFirstTime = prefs.getBoolean("isFirstTime", true);
         activity = this;
+        String tAppLanguageCode = LanguageHelper.getInstance().getAppLanguage(getApplicationContext());
         if (isFirstTime) {
-            // set language
-            Locale locale = new Locale("vi_VN");
-            Locale.setDefault(locale);
-            Configuration config = new Configuration();
-            config.locale = locale;
-            this.getApplicationContext().getResources().updateConfiguration(config, null);
-            //download = new Download();
+            // set default language
+            tAppLanguageCode = "vi_VN";
             DataHelper dataHelper = new DataHelper(this);
             dataHelper.createDataBase();
-
-            download = new Download(this);
+            Download download = new Download(this);
             download.getLocationType();
             download.getAccessibilityType();
             download.getLocation();
-            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-            editor.clear();
-            editor.putBoolean("isFirstTime", false);
-            editor.commit();
         }
-
-
         setUpMapIfNeeded();
-
+        // Set language
+        LanguageHelper.getInstance().setAppLanguage(tAppLanguageCode, this.getApplicationContext());
     }
 
 
