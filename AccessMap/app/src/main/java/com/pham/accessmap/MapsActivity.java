@@ -81,9 +81,9 @@ public class MapsActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        markerPoints = new ArrayList<LatLng>();
+        markerPoints = new ArrayList<>();
         fixNetworkOnMainThreadException();
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(LanguageHelper.PREFS_NAME, MODE_PRIVATE);
         boolean isFirstTime = prefs.getBoolean("isFirstTime", true);
         activity = this;
         String tAppLanguageCode = LanguageHelper.getInstance().getAppLanguage(getApplicationContext());
@@ -96,14 +96,19 @@ public class MapsActivity extends FragmentActivity {
             download.getLocationType();
             download.getAccessibilityType();
             download.getLocation();
+            isFirstTime = false;
         }
+        SharedPreferences.Editor editor = getSharedPreferences(LanguageHelper.PREFS_NAME, 0).edit();
+        editor.putBoolean("isFirstTime", isFirstTime);
+        editor.commit();
+
         setUpMapIfNeeded();
         // Set language
         LanguageHelper.getInstance().setAppLanguage(tAppLanguageCode, this.getApplicationContext());
 
-        SearchView searchView = (SearchView)findViewById(R.id.mapSearchView);
-        searchView.clearFocus();
-        searchView.setEnabled(false);
+//        SearchView searchView = (SearchView)findViewById(R.id.mapSearchView);
+//        searchView.clearFocus();
+//        searchView.setEnabled(false);
     }
 
 
@@ -292,7 +297,7 @@ public class MapsActivity extends FragmentActivity {
 
 
     public void onClick_Info(View v) {
-        Intent intent = new Intent(this, InfoActivity.class);
+        Intent intent = new Intent(this, InfoSettingActivity.class);
         startActivity(intent);
     }
 

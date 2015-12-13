@@ -56,4 +56,8 @@
     <string name="alert_adding_success">Place successfully added to My List</string>
     <string name="marker_title_walking">Walking</string>
     <string name="share_location_select_button">-Select-</string>
+    <string name="app_language_title_vi">Vietnamese</string>
+    <string name="app_language_title_en">English</string>
+    <string name="button_setting_help_title">Help</string>
+    <string name="button_setting_info_title">Information</string>
 </resources>

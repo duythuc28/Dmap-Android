@@ -32,7 +32,6 @@ public class LanguageHelper {
         config.locale = locale;
         mContext.getResources().updateConfiguration(config, null);
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PREFS_NAME, 0).edit();
-        editor.clear();
         editor.putString("kLanguageCode", mLanguageCode);
         editor.commit();
     }

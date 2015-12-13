@@ -56,4 +56,11 @@
     <string name="alert_adding_success">Địa điểm đã được thêm vào danh sách</string>
     <string name="marker_title_walking">Đi bộ</string>
     <string name="share_location_select_button">-Lựa chọn-</string>
+    <string name="app_language_title_vi">Tiếng Việt</string>
+    <string name="app_language_title_en">Tiếng Anh</string>
+    <string name="button_setting_help_title">Giúp đỡ</string>
+    <string name="button_setting_info_title">Thông tin</string>
+    <string name="title_activity_info_setting">DMap</string>
+
+
 </resources>
