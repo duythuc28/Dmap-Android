@@ -29,6 +29,7 @@
     <string name="label_location_name">Place Name</string>
     <string name="label_location_address">Place Address</string>
     <string name="label_location_phone">Place Phone</string>
+    <string name="label_location_category">Place categories</string>
     <string name="label_username"></string>
     <string name="label_password"></string>
     <string name="label_userphone">User phone</string>
@@ -43,7 +44,7 @@
     <string name="label_share_button">Share your location</string>
     <string name="label_guide_button">Measure Accessibility</string>
     <string name="label_List_button">List</string>
-    <string name="label_postAll_button">Send all to admin</string>
+    <string name="label_postAll_button">Send all</string>
     <string name="label_language">Language</string>
     <string name="label_from">From :</string>
     <string name="label_to">To :</string>
@@ -54,4 +55,5 @@
     <string name="alert_save_data">Data saved successfully</string>
     <string name="alert_adding_success">Place successfully added to My List</string>
     <string name="marker_title_walking">Walking</string>
+    <string name="share_location_select_button">-Select-</string>
 </resources>

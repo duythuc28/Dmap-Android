@@ -1,14 +1,16 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.pham.accessmap.DRDStaffActivity">
 
     <TextView
         android:id="@+id/en_location"
-        android:text="    Location Info" android:layout_width="fill_parent"
+        android:text="@string/label_location_information"
+        android:layout_width="fill_parent"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
@@ -19,120 +21,107 @@
         />
     <EditText
         android:id="@+id/endUser_locationName"
-        android:layout_below="@+id/en_location"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
-        android:hint="Location Name"/>
+        android:hint="@string/label_location_name"/>
 
     <EditText
         android:id="@+id/endUser_locationPhone"
-        android:layout_below="@+id/endUser_locationName"
+        android:imeOptions="actionNext"
+        android:singleLine="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:inputType="phone"
-        android:hint="Location Phone"/>
+        android:hint="@string/label_location_phone"/>
 
     <EditText
         android:id="@+id/endUser_locationAdd"
-        android:layout_below="@+id/endUser_locationPhone"
+        android:singleLine="true"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
-        android:hint="Location Address"/>
+        android:hint="@string/label_location_address"/>
 
-    <TextView
-        android:id="@+id/endUser_locationType"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:text="  Location Type"
-        android:layout_below="@+id/endUser_locationAdd"
-        android:textSize="16dp"
-        />
-    <Spinner
-        android:id="@+id/endUser_selectLocationType"
-        android:gravity="center_horizontal"
-
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/endUser_locationAdd"
-        android:layout_alignParentRight="true">
-
-    </Spinner>
-
-    <TextView
-        android:id="@+id/endUser_accessType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="5dp"
-        android:text="  Accessibility Type"
-        android:layout_below="@+id/endUser_selectLocationType"
-        android:textSize="16dp"
-        />
-
-    <com.pham.accessmap.Object.MultiSelectionSpinner
-        android:id="@+id/endUser_spinnerAccess"
-        android:layout_below="@+id/endUser_selectLocationType"
-        android:layout_alignParentRight="true"
-        android:gravity="left|top"
-        android:layout_marginTop="12dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"></com.pham.accessmap.Object.MultiSelectionSpinner>
-
-    <TextView
-        android:id="@+id/entv_personal"
-        android:text="   Personal Info"
-        android:layout_width="fill_parent"
-        android:layout_height="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:textColor="@color/gray"
-        android:background="@color/genre"
-        android:gravity="left|center"
-        android:layout_below="@+id/endUser_accessType"
-        android:textSize="16dp"/>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/endUser_locationType"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/label_location_category"
+            android:textSize="16dp"
+            />
+        <Spinner
+            android:id="@+id/endUser_selectLocationType"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            >
 
-    <EditText
-        android:id="@+id/endUser_UserName"
-        android:layout_below="@+id/entv_personal"
-        android:layout_width="fill_parent"
+        </Spinner>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="5dp"
-        android:inputType="phone"
-        android:hint="User Phone"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:id="@+id/endUser_accessType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="@string/title_activity_guide"
+            android:textSize="16dp"
+            />
 
+        <com.pham.accessmap.Object.MultiSelectionSpinner
+            android:id="@+id/endUser_spinnerAccess"
+            android:gravity="left|top"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:layout_marginTop="15dp">
     <Button
         android:id="@+id/btn_Post"
-        android:text="Post"
+        android:text="@string/label_post_button"
         android:textColor="@color/iOS"
         android:layout_marginLeft="6dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/endUser_UserName"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:background="@color/gray"
         android:layout_height="wrap_content"
-        android:onClick="onClick_enPost"/>
+        android:onClick="onClick_enPost"
+        android:layout_weight="1"
+        />
 
     <Button
         android:id="@+id/btn_Save"
-        android:text="Save"
+        android:text="@string/label_save_button"
         android:textColor="@color/iOS"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="5dp"
-        android:layout_below="@id/endUser_UserName"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:background="@color/gray"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/btn_Post"
-        android:onClick="onClick_enSave"/>
+        android:onClick="onClick_enSave"
+        android:layout_weight="1"/>
+    </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>

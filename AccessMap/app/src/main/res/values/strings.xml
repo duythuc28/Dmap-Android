@@ -29,6 +29,7 @@
     <string name="label_location_name">Tên địa điêm</string>
     <string name="label_location_address">Địa chỉ</string>
     <string name="label_location_phone">Số điện thoại</string>
+    <string name="label_location_category">Loại địa điểm</string>
     <string name="label_username"></string>
     <string name="label_password"></string>
     <string name="label_userphone">Số điện thoại của bạn</string>
@@ -43,7 +44,7 @@
     <string name="label_share_button">Thêm điểm tiếp cận</string>
     <string name="label_guide_button">Đo khả năng tiếp cận</string>
     <string name="label_List_button">Danh sách địa điểm</string>
-    <string name="label_postAll_button">Gửi hết cho admin</string>
+    <string name="label_postAll_button">Gửi hết</string>
     <string name="label_language">Ngôn ngữ</string>
     <string name="label_from">Đi từ</string>
     <string name="label_to">Đến</string>
@@ -54,4 +55,5 @@
     <string name="alert_save_data">Dữ liệu đã được lưu</string>
     <string name="alert_adding_success">Địa điểm đã được thêm vào danh sách</string>
     <string name="marker_title_walking">Đi bộ</string>
+    <string name="share_location_select_button">-Lựa chọn-</string>
 </resources>

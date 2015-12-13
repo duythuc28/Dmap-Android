@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.pham.accessmap.EndUser_SaveList">
     <item android:id="@+id/action_postAll"
-        android:title="POST ALL"
-        app:showAsAction="always"></item>
+        android:title="@string/label_postAll_button"
+        app:showAsAction="always">
+    </item>
 </menu>

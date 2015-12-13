@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.SearchView;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.pham.accessmap.Model.BusDirectionParser;
@@ -88,7 +89,7 @@ public class MapsActivity extends FragmentActivity {
         String tAppLanguageCode = LanguageHelper.getInstance().getAppLanguage(getApplicationContext());
         if (isFirstTime) {
             // set default language
-            tAppLanguageCode = "vi_VN";
+            tAppLanguageCode = LanguageHelper.VIETNAMESE;
             DataHelper dataHelper = new DataHelper(this);
             dataHelper.createDataBase();
             Download download = new Download(this);
@@ -99,6 +100,10 @@ public class MapsActivity extends FragmentActivity {
         setUpMapIfNeeded();
         // Set language
         LanguageHelper.getInstance().setAppLanguage(tAppLanguageCode, this.getApplicationContext());
+
+        SearchView searchView = (SearchView)findViewById(R.id.mapSearchView);
+        searchView.clearFocus();
+        searchView.setEnabled(false);
     }
 
 
@@ -327,6 +332,12 @@ public class MapsActivity extends FragmentActivity {
         startActivity(intent);
     }
 
+    public void onClick_Sharing(View view) {
+        Intent intent = new Intent(this, EndUserActivity.class);
+        startActivity(intent);
+    }
+
+
     private void fixNetworkOnMainThreadException() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
@@ -430,6 +441,7 @@ public class MapsActivity extends FragmentActivity {
         }
         return data;
     }
+
 
     // Fetches data from url passed
     private class DownloadTask extends AsyncTask<String, Void, String> {

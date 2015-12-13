@@ -24,7 +24,7 @@
             />
 
         <SearchView
-            android:id="@+id/search_bar"
+            android:id="@+id/mapSearchView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/borderline"
@@ -71,10 +71,10 @@
             android:id="@+id/btnSetting"
             android:layout_width="33dp"
             android:layout_height="33dp"
-            android:background="@drawable/settings"
+            android:background="@drawable/mapview_add"
             android:layout_centerInParent="true"
             android:layout_alignParentLeft="true"
-            android:onClick="onClick_Setting"
+            android:onClick="onClick_Sharing"
             android:layout_marginLeft="10dp"
             />
 

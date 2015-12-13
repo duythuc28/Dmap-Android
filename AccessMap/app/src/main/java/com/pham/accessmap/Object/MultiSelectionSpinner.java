@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import com.pham.accessmap.R;
+
 public class MultiSelectionSpinner extends Spinner implements
         OnMultiChoiceClickListener {
     String[] _items = null;
@@ -70,7 +72,7 @@ public class MultiSelectionSpinner extends Spinner implements
         mSelection = new boolean[_items.length];
         simple_adapter.clear();
         //simple_adapter.add(_items[0]);
-        simple_adapter.add("--  Select  --");
+        simple_adapter.add(getResources().getString(R.string.share_location_select_button));
         Arrays.fill(mSelection, false);
     }
 
@@ -78,7 +80,7 @@ public class MultiSelectionSpinner extends Spinner implements
         _items = items.toArray(new String[items.size()]);
         mSelection = new boolean[_items.length];
         simple_adapter.clear();
-        simple_adapter.add("--  Select  --");
+        simple_adapter.add(getResources().getString(R.string.share_location_select_button));
         //simple_adapter.add(_items[0]);
         Arrays.fill(mSelection, false);
     }

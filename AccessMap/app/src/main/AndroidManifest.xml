@@ -149,7 +149,7 @@
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.pham.accessmap.InfoActivity" />
+                android:value="com.pham.accessmap.MapsActivity" />
         </activity>
         <activity
             android:name=".DRD_SaveList"

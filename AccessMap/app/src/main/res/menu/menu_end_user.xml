@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.pham.accessmap.EndUserActivity">
     <item android:id="@+id/action_showUserList"
-        android:title="List"
-        app:showAsAction="always"></item>
+        android:title="@string/label_List_button"
+        app:showAsAction="always">
+    </item>
 </menu>

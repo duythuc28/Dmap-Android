@@ -17,6 +17,7 @@ import android.widget.Spinner;
 
 import com.pham.accessmap.Object.AccessType;
 import com.pham.accessmap.Object.GPSTracker;
+import com.pham.accessmap.Object.LanguageHelper;
 import com.pham.accessmap.Object.LocationTemp;
 import com.pham.accessmap.Object.LocationType;
 import com.pham.accessmap.Object.MultiSelectionSpinner;
@@ -63,18 +64,17 @@ public class EndUserActivity extends ActionBarActivity {
         LocationType locationType = new LocationType(this);
         AccessType accessType = new AccessType(this);
 
-        SharedPreferences preferences = this.getSharedPreferences("MyPref",this.MODE_PRIVATE);
-        boolean language = preferences.getBoolean("language", false);
-        // Add to Alert Diaglog
-        if (language == true)
-        {
-             data1 = accessType.getAllName_En();
-            data = locationType.getNameEng();
-        }
-        else
+        String tLanguageCode = LanguageHelper.getInstance().getAppLanguage(this);
+        // Add to Alert Dialog
+        if (tLanguageCode.equals(LanguageHelper.VIETNAMESE))
         {
             data1 = accessType.getAllName();
             data = locationType.getNameVn();
+        }
+        else
+        {
+            data1 = accessType.getAllName_En();
+            data = locationType.getNameEng();
         }
 
 
@@ -100,7 +100,7 @@ public class EndUserActivity extends ActionBarActivity {
         endUser_locationName = (EditText) findViewById(R.id.endUser_locationName);
         endUser_locationAdd = (EditText) findViewById(R.id.endUser_locationAdd);
         endUser_locationPhone = (EditText) findViewById(R.id.endUser_locationPhone);
-        endUser_UserName = (EditText) findViewById(R.id.endUser_UserName);
+//        endUser_UserName = (EditText) findViewById(R.id.endUser_UserName);
 
         // Add to MultiSelection Spinner
 
@@ -186,22 +186,6 @@ public class EndUserActivity extends ActionBarActivity {
         @Override
         protected String doInBackground(String... urls) {
 
-//            postLocation = new PostLocation();
-//            postLocation.Location_AccessType = new ArrayList<Integer>();
-            //gpsTracker = new GPSTracker(EndUserActivity.this);
-            postLocation.postLocationName = (endUser_locationName.getText().toString());
-            postLocation.location_Type = list_locationType.getSelectedItemPosition() + 1;
-            postLocation.latitude = String.valueOf(gpsTracker.getLatitude());
-            postLocation.longitude = String.valueOf(gpsTracker.getLongitude());
-            for (int i = 0; i < spinner.getSelectedIndicies().size(); i++) {
-                postLocation.Location_AccessType.add(spinner.getSelectedIndicies().indexOf(i) + 2);
-            }
-            //postLocation.Location_AccessType.add(1);
-            postLocation.userPhone = endUser_UserName.getText().toString();
-            postLocation.postLocationAddress = endUser_locationAdd.getText().toString();
-            postLocation.postLocationPhone = endUser_locationPhone.getText().toString();
-
-            //person.setTwitter(etTwitter.getText().toString());
 
             return POST(urls[0], postLocation);
         }
@@ -308,8 +292,24 @@ public class EndUserActivity extends ActionBarActivity {
         endUser_locationAdd.setText(locationTemp1.locationAddress);
     }
 
+    private void setPostLocation (PostLocation sPostLocation){
+        sPostLocation.postLocationName = (endUser_locationName.getText().toString());
+        sPostLocation.location_Type = list_locationType.getSelectedItemPosition() + 1;
+        sPostLocation.latitude = String.valueOf(gpsTracker.getLatitude());
+        sPostLocation.longitude = String.valueOf(gpsTracker.getLongitude());
+        for (int i = 0; i < spinner.getSelectedIndicies().size(); i++) {
+            sPostLocation.Location_AccessType.add(spinner.getSelectedIndicies().indexOf(i) + 2);
+        }
+        //postLocation.Location_AccessType.add(1);
+        sPostLocation.userPhone = endUser_UserName.getText().toString();
+        sPostLocation.postLocationAddress = endUser_locationAdd.getText().toString();
+        sPostLocation.postLocationPhone = endUser_locationPhone.getText().toString();
+    }
+
     public void onClick_enPost(View v) {
+        // TODO: Add new custom alert dialog to ask if user or Drd staff
         if (validate()) {
+            setPostLocation(this.postLocation);
             new HttpAsyncTask().execute(uri);
         } else {
             new AlertDialog.Builder(EndUserActivity.this)
@@ -320,7 +320,6 @@ public class EndUserActivity extends ActionBarActivity {
                             // continue with delete
                         }
                     })
-
                     .show();
         }
     }

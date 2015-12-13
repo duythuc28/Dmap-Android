@@ -12,6 +12,8 @@ import java.util.Locale;
 public class LanguageHelper {
     private static LanguageHelper mInstance = null;
     public static final String PREFS_NAME = "MyPref";
+    public static final String VIETNAMESE = "vi_VN";
+    public static final String ENGLISH = "en_US";
     private LanguageHelper () {
 
     }
