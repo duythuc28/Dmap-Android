@@ -16,6 +16,8 @@
     <color name="blue">#0000cd</color>
     <color name="iOS">#0FA1E0</color>
     <color name="bike">#46BFF6</color>
+    <color name="white_color">#ffffff</color>
+    <color name="black_color">#000000</color>
 
     <style name="Theme.AppCompat.Translucent">
         <item name="android:windowNoTitle">true</item>

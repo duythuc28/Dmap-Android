@@ -75,14 +75,14 @@ public class MapsActivity extends FragmentActivity {
     List<Marker> mBusMarkers;
     private static final int GOOGLE_MAP_BOUND_PADDING = 200;
 
-    private Map<Marker, MapMarker> allMarkersMap = new HashMap<Marker, MapMarker>();
+    private Map<Marker, MapMarker> allMarkersMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         markerPoints = new ArrayList<>();
-        fixNetworkOnMainThreadException();
+//        fixNetworkOnMainThreadException();
         SharedPreferences prefs = getSharedPreferences(LanguageHelper.PREFS_NAME, MODE_PRIVATE);
         boolean isFirstTime = prefs.getBoolean("isFirstTime", true);
         activity = this;
@@ -92,23 +92,41 @@ public class MapsActivity extends FragmentActivity {
             tAppLanguageCode = LanguageHelper.VIETNAMESE;
             DataHelper dataHelper = new DataHelper(this);
             dataHelper.createDataBase();
-            Download download = new Download(this);
-            download.getLocationType();
-            download.getAccessibilityType();
-            download.getLocation();
+            requestDataFromAPI();
             isFirstTime = false;
+        } else {
+            setUpMapIfNeeded();
         }
         SharedPreferences.Editor editor = getSharedPreferences(LanguageHelper.PREFS_NAME, 0).edit();
         editor.putBoolean("isFirstTime", isFirstTime);
         editor.commit();
-
-        setUpMapIfNeeded();
+//        setUpMapIfNeeded();
         // Set language
         LanguageHelper.getInstance().setAppLanguage(tAppLanguageCode, this.getApplicationContext());
+    }
 
-//        SearchView searchView = (SearchView)findViewById(R.id.mapSearchView);
-//        searchView.clearFocus();
-//        searchView.setEnabled(false);
+    private void requestDataFromAPI () {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Download download = new Download(MapsActivity.this);
+                    download.getAccessibilityType();
+                    download.getLocationType();
+                    download.getLocation();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setUpMapIfNeeded();
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }).start();
     }
 
 
@@ -255,7 +273,7 @@ public class MapsActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setUpMapIfNeeded();
+//        setUpMapIfNeeded();
     }
 
     private void setUpMapIfNeeded() {
@@ -357,12 +375,12 @@ public class MapsActivity extends FragmentActivity {
     private void showMarkers() {
 
         LocMarker locMarker = new LocMarker(this);
-        listMarker = new ArrayList<Marker>();
-        SharedPreferences prefs = this.getSharedPreferences("MyPref", this.MODE_PRIVATE);
+        listMarker = new ArrayList<>();
+        SharedPreferences prefs = this.getSharedPreferences(LanguageHelper.PREFS_NAME,MODE_PRIVATE);
         int km = prefs.getInt("radius", 3);
         LatLng center = mMap.getCameraPosition().target;
 
-        List<LocMarker> data = new ArrayList<LocMarker>(locMarker.getAllMarkerWithDistance(km, center.latitude, center.longitude));
+        List<LocMarker> data = new ArrayList<>(locMarker.getAllMarkerWithDistance(km, center.latitude, center.longitude));
 
         for (LocMarker lc : data) {
             byte[] bytes = Base64.decode(lc.Image, Base64.DEFAULT);

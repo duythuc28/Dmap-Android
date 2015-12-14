@@ -48,47 +48,6 @@ public class InfoActivity extends ActionBarActivity {
     public void onClick_Update(View v)
     {
 
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(InfoActivity.this, "Please wait ...", "Downloading ...", true);
-        final boolean isSuccess = false;
-        ringProgressDialog.setCancelable(true);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-
-                    Download download = new Download(InfoActivity.this);
-                    download.getAccessibilityType();
-                    download.getLocationType();
-                    download.getLocation();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Your dialog code.
-                            new AlertDialog.Builder(InfoActivity.this)
-                                    .setTitle("Success")
-                                    .setMessage("You have updated information")
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
-                                    {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            // continue with delete
-                                            dialog.cancel();
-                                        }
-                                    })
-                                    .show();
-                        }
-                    });
-
-                } catch (Exception e) {
-
-                }
-                ringProgressDialog.dismiss();
-
-            }
-
-        }).start();
-
-
-
     }
 
     public void onClick_Guide(View v)

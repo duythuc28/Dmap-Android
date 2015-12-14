@@ -34,7 +34,7 @@
     <string name="label_password"></string>
     <string name="label_userphone">User phone</string>
     <string name="label_radius">Radius range</string>
-    <string name="label_save_button">Save to device</string>
+    <string name="label_save_button">Save</string>
     <string name="label_routes_button">Routes</string>
     <string name="label_post_button">Send to admin</string>
     <string name="label_motorbike_button">Motorbike</string>

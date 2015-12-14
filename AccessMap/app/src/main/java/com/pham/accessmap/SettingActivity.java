@@ -198,7 +198,6 @@ public class SettingActivity extends ActionBarActivity {
             //Button saveButton = (Button)findViewById(R.id.action_save);
             //saveButton.setText(R.string.label_save_button);
             SharedPreferences.Editor editor = this.getSharedPreferences("MyPref",this.MODE_PRIVATE).edit();
-            editor.clear();
             editor.putInt("radius", seekBar.getProgress());
             editor.putBoolean("language",language);
             editor.commit();

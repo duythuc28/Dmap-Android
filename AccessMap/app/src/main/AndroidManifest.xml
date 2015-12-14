@@ -171,7 +171,8 @@
             android:label="@string/title_activity_info_setting"
             android:parentActivityName=".MapsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Translucent">
+            android:theme="@style/Theme.AppCompat.Translucent"
+            >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pham.accessmap.MapsActivity" />

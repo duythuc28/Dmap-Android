@@ -34,7 +34,7 @@
     <string name="label_password"></string>
     <string name="label_userphone">Số điện thoại của bạn</string>
     <string name="label_radius">Bán kính</string>
-    <string name="label_save_button">Lưu vào máy</string>
+    <string name="label_save_button">Lưu</string>
     <string name="label_routes_button">Lộ trình</string>
     <string name="label_post_button">Gửi cho admin</string>
     <string name="label_motorbike_button">Xe máy</string>
