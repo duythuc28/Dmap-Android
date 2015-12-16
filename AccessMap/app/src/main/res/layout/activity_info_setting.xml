@@ -23,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/app_language_title_vi"/>
+            android:text="@string/app_language_title_vi"
+            android:onClick="onClick_VNButton"/>
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

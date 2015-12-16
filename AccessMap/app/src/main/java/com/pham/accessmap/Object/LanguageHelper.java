@@ -12,8 +12,8 @@ import java.util.Locale;
 public class LanguageHelper {
     private static LanguageHelper mInstance = null;
     public static final String PREFS_NAME = "MyPref";
-    public static final String VIETNAMESE = "vi_VN";
-    public static final String ENGLISH = "en_US";
+    public static final String VIETNAMESE = "vi";
+    public static final String ENGLISH = "en";
     private LanguageHelper () {
 
     }
@@ -31,6 +31,7 @@ public class LanguageHelper {
         Configuration config = new Configuration();
         config.locale = locale;
         mContext.getResources().updateConfiguration(config, null);
+        mContext.getResources().getDisplayMetrics();
         SharedPreferences.Editor editor = mContext.getSharedPreferences(PREFS_NAME, 0).edit();
         editor.putString("kLanguageCode", mLanguageCode);
         editor.commit();

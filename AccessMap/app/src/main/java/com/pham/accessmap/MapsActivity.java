@@ -89,7 +89,7 @@ public class MapsActivity extends FragmentActivity {
         String tAppLanguageCode = LanguageHelper.getInstance().getAppLanguage(getApplicationContext());
         if (isFirstTime) {
             // set default language
-            tAppLanguageCode = LanguageHelper.VIETNAMESE;
+            tAppLanguageCode = LanguageHelper.ENGLISH;
             DataHelper dataHelper = new DataHelper(this);
             dataHelper.createDataBase();
             requestDataFromAPI();
@@ -102,7 +102,7 @@ public class MapsActivity extends FragmentActivity {
         editor.commit();
 //        setUpMapIfNeeded();
         // Set language
-        LanguageHelper.getInstance().setAppLanguage(tAppLanguageCode, this.getApplicationContext());
+        LanguageHelper.getInstance().setAppLanguage(tAppLanguageCode, this.getBaseContext());
     }
 
     private void requestDataFromAPI () {
