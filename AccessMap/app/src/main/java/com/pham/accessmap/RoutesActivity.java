@@ -1,6 +1,7 @@
 package com.pham.accessmap;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -9,7 +10,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -57,23 +60,32 @@ public class RoutesActivity extends ActionBarActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (isRoute == true)
-                {
+                if (isRoute) {
                     Double latitude = Double.parseDouble(data.get(position).latitude);
                     Double longitude = Double.parseDouble(data.get(position).longitude);
-                    destination = new LatLng(latitude,longitude);
+                    destination = new LatLng(latitude, longitude);
                     toText.setText(data.get(position).location_title);
-                }
-                else {
+                } else {
                     //
                     Double latitude = Double.parseDouble(data.get(position).latitude);
                     Double longitude = Double.parseDouble(data.get(position).longitude);
-                    original = new LatLng(latitude,longitude);
+                    original = new LatLng(latitude, longitude);
                     fromText.setText(data.get(position).location_title);
                 }
             }
         });
 
+
+        fromText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+//                    Toast.makeText(getApplicationContext(), "got the focus", Toast.LENGTH_LONG).show();
+                    isRoute = false;
+                    reloadData();
+                }
+            }
+        });
 
         fromText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -85,12 +97,9 @@ public class RoutesActivity extends ActionBarActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 isRoute = false;
-                if (count == 0)
-                {
+                if (count == 0) {
                     reloadData();
-                }
-                else
-                {
+                } else {
                     data = location.getSearchData(s);
                     adapter.clear();
                     adapter.addAll(data);
@@ -101,6 +110,17 @@ public class RoutesActivity extends ActionBarActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        toText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+//                    Toast.makeText(getApplicationContext(), "got the focus", Toast.LENGTH_LONG).show();
+                    isRoute = true;
+                    reloadData();
+                }
             }
         });
 
