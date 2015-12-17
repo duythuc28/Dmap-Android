@@ -60,4 +60,7 @@
     <string name="app_language_title_en">English</string>
     <string name="button_setting_help_title">Help</string>
     <string name="button_setting_info_title">Information</string>
+    <string name="alert_loading_title">Please wait</string>
+    <string name="alert_download_message">Downloading</string>
+    <string name="alert_ok_title">Ok</string>
 </resources>

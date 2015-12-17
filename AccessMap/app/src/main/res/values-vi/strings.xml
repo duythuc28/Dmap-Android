@@ -61,4 +61,8 @@
     <string name="button_setting_help_title">Giúp đỡ</string>
     <string name="button_setting_info_title">Thông tin</string>
     <string name="title_activity_info_setting">DMap</string>
+    <string name="alert_loading_title">Xin chờ</string>
+    <string name="alert_download_message">Dữ liệu của bạn đang được tải về</string>
+    <string name="alert_ok_title">Đồng ý</string>
+
 </resources>

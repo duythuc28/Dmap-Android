@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -11,13 +12,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.pham.accessmap.Object.Download;
 import com.pham.accessmap.Object.LanguageHelper;
 
+import org.w3c.dom.Text;
+
 public class InfoSettingActivity extends ActionBarActivity {
 
-    private String      mLanguageCode ;
+    private String mLanguageCode ;
+    private int    mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +40,38 @@ public class InfoSettingActivity extends ActionBarActivity {
         mLanguageCode        = LanguageHelper.getInstance().getAppLanguage(this);
         tViRadioButton.setChecked(mLanguageCode.equals(LanguageHelper.VIETNAMESE));
         tEnRadioButton.setChecked(mLanguageCode.equals(LanguageHelper.ENGLISH));
+
+        SeekBar    tRadiusSeekbar  =  (SeekBar) findViewById(R.id.setting_seekbar_radius);
+        tRadiusSeekbar.setProgress(getRadiusRange());
+        TextView   tRadiusTitle    =  (TextView)findViewById(R.id.setting_textview_radius_title);
+        tRadiusTitle.setText(getRadiusRange() + "km");
+
+        seekBarOnChangedListener(tRadiusSeekbar, tRadiusTitle);
+    }
+
+    private void seekBarOnChangedListener (SeekBar seekBar, final TextView radiusTitle) {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                radiusTitle.setText(progress + "km");
+                mProgress = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+    private int getRadiusRange () {
+        SharedPreferences tSharedPref = this.getSharedPreferences(LanguageHelper.PREFS_NAME, MODE_PRIVATE);
+        return tSharedPref.getInt("radius",3);
     }
 
     public void onClick_helpButton(View view) {
@@ -54,7 +92,20 @@ public class InfoSettingActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.setting_action_save) {
-
+            SharedPreferences.Editor editor = this.getSharedPreferences(LanguageHelper.PREFS_NAME,MODE_PRIVATE).edit();
+            editor.putInt("radius", mProgress);
+            editor.commit();
+            new AlertDialog.Builder(InfoSettingActivity.this)
+                    .setTitle(getResources().getString(R.string.alert_success_title))
+                    .setMessage(getResources().getString(R.string.alert_save_data))
+                    .setPositiveButton(getResources().getString(R.string.alert_ok_title), new DialogInterface.OnClickListener()
+                    {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // continue with delete
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -69,7 +120,7 @@ public class InfoSettingActivity extends ActionBarActivity {
 
     public void onClick_updateButton(View view) {
         // TODO: Hard code
-        final ProgressDialog ringProgressDialog = ProgressDialog.show(this, "Please wait ...", "Downloading ...", true);
+        final ProgressDialog ringProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.alert_loading_title), getResources().getString(R.string.alert_download_message), true);
         ringProgressDialog.setCancelable(true);
         new Thread(new Runnable() {
             @Override
@@ -85,9 +136,9 @@ public class InfoSettingActivity extends ActionBarActivity {
                         public void run() {
                             // Your dialog code.
                             new AlertDialog.Builder(InfoSettingActivity.this)
-                                    .setTitle("Success")
-                                    .setMessage("You have updated information")
-                                    .setPositiveButton("OK", new DialogInterface.OnClickListener()
+                                    .setTitle(getResources().getString(R.string.alert_success_title))
+                                    .setMessage(getResources().getString(R.string.alert_save_data))
+                                    .setPositiveButton(getResources().getString(R.string.alert_ok_title), new DialogInterface.OnClickListener()
                                     {
                                         public void onClick(DialogInterface dialog, int which) {
                                             // continue with delete

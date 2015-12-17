@@ -17,6 +17,8 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:max = "5"
+            android:progress="3"
            />
         <TextView
             android:id="@+id/setting_textview_radius_title"

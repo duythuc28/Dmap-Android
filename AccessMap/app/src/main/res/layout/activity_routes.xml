@@ -15,6 +15,8 @@
         android:onClick="onClick_switch"/>
    <EditText
        android:id="@+id/fromRoute"
+       android:imeOptions="actionNext"
+       android:singleLine="true"
        android:layout_marginTop="5dp"
        android:layout_marginLeft="10dp"
        android:layout_width="match_parent"
@@ -24,6 +26,7 @@
         android:id="@+id/toRoute"
         android:layout_below="@+id/fromRoute"
         android:layout_marginTop="5dp"
+        android:singleLine="true"
         android:layout_marginLeft="60dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
@@ -32,6 +35,8 @@
         android:layout_below="@+id/toRoute"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 </RelativeLayout>
