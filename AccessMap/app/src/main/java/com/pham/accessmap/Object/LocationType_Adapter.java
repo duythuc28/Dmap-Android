@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,17 @@ public class LocationType_Adapter extends ArrayAdapter<LocationType> {
     private final ArrayList<LocationType> locationTypes;
     private final Context context;
     public ArrayList<Integer> checkedList;
+    static class ViewHolder {
+//        TextView text;
+//        TextView timestamp;
+//        ImageView icon;
+//        ProgressBar progress;
+//        int position;
+        TextView locationTitleTextView;
+        ImageView locationImageView;
+        Switch locationSwitch;
+    }
+
     public LocationType_Adapter (Context context , ArrayList<LocationType>locationTypes)
     {
         super (context , R.layout.locationtype_cell, locationTypes);
@@ -36,42 +48,41 @@ public class LocationType_Adapter extends ArrayAdapter<LocationType> {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.locationtype_cell, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.locationType_name);
-        //TextView tView1 = (TextView)rowView.findViewById(R.id.guide_accessDes);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.locationType_Image);
 
-        SharedPreferences preferences = context.getSharedPreferences("MyPref",context.MODE_PRIVATE);
-        boolean language = preferences.getBoolean("language", false);
-        if (language == true)
-        {
-            textView.setText(locationTypes.get(position).locationName_en);
-        }
-        else
-        {
-            textView.setText(locationTypes.get(position).locationName);
+        ViewHolder viewHolder;
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.locationtype_cell, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.locationTitleTextView = (TextView) convertView.findViewById(R.id.locationType_name);
+            viewHolder.locationImageView = (ImageView) convertView.findViewById(R.id.locationType_Image);
+            viewHolder.locationSwitch = (Switch) convertView.findViewById(R.id.switch_locationType);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        Switch switch_location = (Switch) rowView.findViewById(R.id.switch_locationType);
-        switch_location.setChecked((locationTypes.get(position).isCheck == 1 ));
-        checkedList = new ArrayList<Integer>();
+        if (LanguageHelper.getInstance().getAppLanguage(context).equals(LanguageHelper.ENGLISH)) {
+            viewHolder.locationTitleTextView.setText(locationTypes.get(position).locationName_en);
+        } else {
+            viewHolder.locationTitleTextView.setText(locationTypes.get(position).locationName);
+        }
 
-        final LocationType locationType = new LocationType(context);
-        ArrayList<LocationType> data = new ArrayList<LocationType>();
-        data = locationType.getAllData();
-        for (LocationType locType : data)
+        viewHolder.locationSwitch.setChecked((locationTypes.get(position).isCheck == 1 ));
+        checkedList = new ArrayList<>();
+
+        for (LocationType locType : this.locationTypes)
         {
             if (locType.isCheck == 1)
             {
                 checkedList.add(locType.locationType_ID);
-                //Log.v("check list....",String.valueOf(locType.locationType_ID));
+                Log.v("check list....", String.valueOf(locType.locationType_ID));
             }
         }
 
         //final ArrayList<LocationType> finalData = data;
-        switch_location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        viewHolder.locationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -88,10 +99,6 @@ public class LocationType_Adapter extends ArrayAdapter<LocationType> {
                         if (i == locationTypes.get(position).locationType_ID)
                         {
                             checkedList.remove(checkedList.indexOf(i));
-                            //Log.v("check list :",String.valueOf(checkedList.indexOf(i)));
-                            //Log.v("cell turn off",String.valueOf(locationTypes.get(position).locationName_en));
-                            //Log.v("cell turn off",String.valueOf(locationTypes.get(position).locationType_ID));
-
                             break;
                         }
                     }
@@ -101,9 +108,9 @@ public class LocationType_Adapter extends ArrayAdapter<LocationType> {
         //tView1.setText(accessTypes.get(position).accessDes);
         byte[] bytes = Base64.decode(locationTypes.get(position).locationImage, Base64.DEFAULT);
         Bitmap bmp = getBitmap(bytes);
-        imageView.setImageBitmap(bmp);
+        viewHolder.locationImageView.setImageBitmap(bmp);
 
-        return rowView;
+        return convertView;
     }
 
     public Bitmap getBitmap(byte[] bitmap) {

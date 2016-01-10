@@ -4,5 +4,7 @@
     tools:context="com.pham.accessmap.SettingActivity">
     <item android:id="@+id/action_save"
         android:title="@string/label_save_button"
-        app:showAsAction="always"></item>
+        app:showAsAction="always">
+
+    </item>
 </menu>

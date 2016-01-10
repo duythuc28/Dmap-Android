@@ -34,7 +34,7 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SettingActivity"
             android:label="@string/title_activity_setting"
@@ -171,11 +171,23 @@
             android:label="@string/title_activity_info_setting"
             android:parentActivityName=".MapsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Translucent"
-            >
+            android:theme="@style/Theme.AppCompat.Translucent">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.pham.accessmap.MapsActivity" />
+        </activity>
+        <activity
+            android:name=".DMapLocationTypeSettingActivity"
+            android:label="@string/title_activity_dmap_location_type_setting"
+            android:parentActivityName=".InfoSettingActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".About"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".InfoSettingActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -30,10 +30,10 @@ public class LocationType {
         ArrayList<LocationType> data = new ArrayList<LocationType>();
 
         db = new DataHelper(mContext).openDataBase();
-        SharedPreferences preferences = mContext.getSharedPreferences("MyPref",mContext.MODE_PRIVATE);
-        boolean language = preferences.getBoolean("language", false);
+//        SharedPreferences preferences = mContext.getSharedPreferences("MyPref",mContext.MODE_PRIVATE);
+//        boolean language = preferences.getBoolean("language", false);
         String query = "";
-        if (language == true)
+        if (LanguageHelper.getInstance().getAppLanguage(mContext).equals(LanguageHelper.ENGLISH))
         {
             query = "select * from LocationType order by locationName_en ASC";
         }

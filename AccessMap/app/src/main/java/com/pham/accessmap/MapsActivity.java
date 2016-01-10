@@ -68,8 +68,6 @@ public class MapsActivity extends FragmentActivity {
     ArrayList<LatLng> markerPoints;
     LatLng origin;
     LatLng destination;
-    PolylineOptions busLine = null;
-    Polyline busPolyline;
     List<Marker> listMarker;
     List<Polyline> mPolylines;
     List<Marker> mBusMarkers;
@@ -82,14 +80,13 @@ public class MapsActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         markerPoints = new ArrayList<>();
-//        fixNetworkOnMainThreadException();
         SharedPreferences prefs = getSharedPreferences(LanguageHelper.PREFS_NAME, MODE_PRIVATE);
         boolean isFirstTime = prefs.getBoolean("isFirstTime", true);
         activity = this;
         String tAppLanguageCode = LanguageHelper.getInstance().getAppLanguage(getApplicationContext());
         if (isFirstTime) {
             // set default language
-            tAppLanguageCode = LanguageHelper.ENGLISH;
+            tAppLanguageCode = LanguageHelper.VIETNAMESE;
             DataHelper dataHelper = new DataHelper(this);
             dataHelper.createDataBase();
             requestDataFromAPI();
@@ -358,13 +355,6 @@ public class MapsActivity extends FragmentActivity {
     public void onClick_Sharing(View view) {
         Intent intent = new Intent(this, EndUserActivity.class);
         startActivity(intent);
-    }
-
-
-    private void fixNetworkOnMainThreadException() {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
     }
 
 

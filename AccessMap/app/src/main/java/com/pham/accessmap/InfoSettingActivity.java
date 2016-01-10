@@ -33,6 +33,12 @@ public class InfoSettingActivity extends ActionBarActivity {
         setUpActivityView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String tCurrentLanguage = LanguageHelper.getInstance().getAppLanguage(this);
+        LanguageHelper.getInstance().setAppLanguage(tCurrentLanguage, this);
+    }
 
     private void setUpActivityView () {
         RadioButton tEnRadioButton  = (RadioButton)findViewById(R.id.setting_radioButton_en);
@@ -45,7 +51,6 @@ public class InfoSettingActivity extends ActionBarActivity {
         tRadiusSeekbar.setProgress(getRadiusRange());
         TextView   tRadiusTitle    =  (TextView)findViewById(R.id.setting_textview_radius_title);
         tRadiusTitle.setText(getRadiusRange() + "km");
-
         seekBarOnChangedListener(tRadiusSeekbar, tRadiusTitle);
     }
 
@@ -119,7 +124,6 @@ public class InfoSettingActivity extends ActionBarActivity {
     }
 
     public void onClick_updateButton(View view) {
-        // TODO: Hard code
         final ProgressDialog ringProgressDialog = ProgressDialog.show(this, getResources().getString(R.string.alert_loading_title), getResources().getString(R.string.alert_download_message), true);
         ringProgressDialog.setCancelable(true);
         new Thread(new Runnable() {
@@ -160,9 +164,13 @@ public class InfoSettingActivity extends ActionBarActivity {
     }
 
     public void onClick_infoButton(View view) {
+        Intent intent = new Intent(this, About.class);
+        startActivity(intent);
     }
 
     public void onClick_placeType(View view) {
+        Intent intent = new Intent(this, DMapLocationTypeSettingActivity.class);
+        startActivity(intent);
     }
 
     public void onClickEnglishButton(View view) {

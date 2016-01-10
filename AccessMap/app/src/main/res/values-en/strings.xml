@@ -59,8 +59,18 @@
     <string name="app_language_title_vi">Vietnamese</string>
     <string name="app_language_title_en">English</string>
     <string name="button_setting_help_title">Help</string>
-    <string name="button_setting_info_title">Information</string>
+    <string name="button_setting_info_title">About</string>
     <string name="alert_loading_title">Please wait</string>
     <string name="alert_download_message">Downloading</string>
+    <string name="title_activity_dmap_location_type_setting">Place Categories
+    </string>
     <string name="alert_ok_title">Ok</string>
+    <string name="locationType_setting_On">On</string>
+    <string name="title_activity_about">About</string>
+    <string name="about_drd_title">Disability Research and Capacity Development Center</string>
+    <string name="about_drd_description">The Disability Research and Capacity Development Center (DRD Center) is a non-profit organization for the rights of people with disabilities. Located in Ho Chi Minh City, DRD Center builds a support model to promote equal opportunities for people with disabilities, encourage and create conditions for people with disabilities to fully participate in society.</string>
+    <string name="about_hoasen_title">Main partner: Hoa Sen University</string>
+    <string name="about_hoasen_description">
+Established in 1991 as a not - for –profit institution, Hoa Sen University aims to prepare individuals for adaptability, lifelong learning capability and competitiveness in a changing global environment. The university is located in the heart of Ho Chi Minh City, Vietnam.
+    </string>
 </resources>

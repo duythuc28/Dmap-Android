@@ -64,5 +64,15 @@
     <string name="alert_loading_title">Xin chờ</string>
     <string name="alert_download_message">Dữ liệu của bạn đang được tải về</string>
     <string name="alert_ok_title">Đồng ý</string>
+    <string name="title_activity_dmap_location_type_setting">Loại địa điểm
+    </string>
+    <string name="locationType_setting_On">On</string>
+    <string name="title_activity_about">Thông tin</string>
+    <string name="about_drd_title">Trung tâm Khuyết tật và phát triển</string>
+    <string name="about_drd_description">Trung tâm Khuyết tật và phát triển (DRD) tại Thành phố Hồ Chí Minh là một tổ chức phi lợi nhuận bảo vệ quyền lợi của người khuyết tật. DRD xây dựng mô hình hỗ trợ đem lại bình đẳng cho người khuyết tật,khuyến khích và tạo điều kiện cho họ tham gia vào tất cả các hoạt động như những công dân khác trong xã hội.</string>
+    <string name="about_hoasen_title">Đối tác chính: Đại học Hoa Sen</string>
+    <string name="about_hoasen_description">
+Hoa Sen là trường đại học tư thục phi lợi nhuận được thành lập vào năm 1991. Đại học Hoa Sen cam kết chuẩn bị cho sinh viên những kỹ năng học tập suốt đời và khả năng thích nghi cao.  Trường cũng hướng đến tăng cường tính cạnh tranh của sinh viên trong môi trường toàn cầu năng động. Đại học Hoa Sen đặt tại Thành phố Hồ Chí Minh.
+    </string>
 
 </resources>
