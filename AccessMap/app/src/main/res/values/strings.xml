@@ -74,5 +74,7 @@
     <string name="about_hoasen_description">
 Hoa Sen là trường đại học tư thục phi lợi nhuận được thành lập vào năm 1991. Đại học Hoa Sen cam kết chuẩn bị cho sinh viên những kỹ năng học tập suốt đời và khả năng thích nghi cao.  Trường cũng hướng đến tăng cường tính cạnh tranh của sinh viên trong môi trường toàn cầu năng động. Đại học Hoa Sen đặt tại Thành phố Hồ Chí Minh.
     </string>
+    <string name="title_activity_measure_accessibility">Đo khả năng tiếp cận</string>
+    <string name="measure_accessibility_button">Lựa chọn</string>
 
 </resources>

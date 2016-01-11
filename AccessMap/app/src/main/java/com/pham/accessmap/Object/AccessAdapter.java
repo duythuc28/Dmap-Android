@@ -40,9 +40,7 @@ public class AccessAdapter extends ArrayAdapter<AccessType> {
         View rowView = inflater.inflate(R.layout.access_list_cell, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.accessType);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.accessImage);
-        SharedPreferences preferences = context.getSharedPreferences("MyPref",context.MODE_PRIVATE);
-        boolean language = preferences.getBoolean("language", false);
-        if (language == true)
+        if (LanguageHelper.getInstance().getAppLanguage(this.context).equals(LanguageHelper.ENGLISH))
         {
             textView.setText(accessTypes.get(position).accessName_en);
         }

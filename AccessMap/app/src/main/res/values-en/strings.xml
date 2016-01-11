@@ -73,4 +73,6 @@
     <string name="about_hoasen_description">
 Established in 1991 as a not - for –profit institution, Hoa Sen University aims to prepare individuals for adaptability, lifelong learning capability and competitiveness in a changing global environment. The university is located in the heart of Ho Chi Minh City, Vietnam.
     </string>
+    <string name="title_activity_measure_accessibility">Measure Accessibility</string>
+    <string name="measure_accessibility_button">Select</string>
 </resources>

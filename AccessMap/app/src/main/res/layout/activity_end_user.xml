@@ -88,13 +88,15 @@
             android:textSize="16dp"
             />
 
-        <com.pham.accessmap.Object.MultiSelectionSpinner
-            android:id="@+id/endUser_spinnerAccess"
-            android:gravity="left|top"
-            android:layout_width="0dp"
+        <Button
+            android:id="@+id/shareLocation_measure_accessibility_button"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:text="@string/measure_accessibility_button"
+            android:layout_marginLeft="8dp"
+            android:onClick="onClick_measureAccessibility"/>
     </LinearLayout>
+
 
     <LinearLayout
     android:layout_width="match_parent"

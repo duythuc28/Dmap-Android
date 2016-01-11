@@ -104,9 +104,14 @@ public class EndUserActivity extends ActionBarActivity {
 
         // Add to MultiSelection Spinner
 
-        spinner = (MultiSelectionSpinner) findViewById(R.id.endUser_spinnerAccess);
-        spinner.setItems(data1);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String tLanguageCode = LanguageHelper.getInstance().getAppLanguage(this);
+        LanguageHelper.getInstance().setAppLanguage(tLanguageCode,this);
     }
 
     public static String POST(String url, PostLocation postLocation) {
@@ -180,6 +185,12 @@ public class EndUserActivity extends ActionBarActivity {
 
         // 11. return result
         return result;
+    }
+
+    public void onClick_measureAccessibility(View view) {
+        Intent intent = new Intent(this, MeasureAccessibilityActivity.class);
+        int requestCode = 2;
+        startActivityForResult(intent, requestCode);
     }
 
     private class HttpAsyncTask extends AsyncTask<String, Void, String> {

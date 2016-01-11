@@ -180,14 +180,22 @@
             android:name=".DMapLocationTypeSettingActivity"
             android:label="@string/title_activity_dmap_location_type_setting"
             android:parentActivityName=".InfoSettingActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".About"
             android:label="@string/title_activity_about"
             android:parentActivityName=".InfoSettingActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".MeasureAccessibilityActivity"
+            android:label="@string/title_activity_measure_accessibility"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".EndUserActivity"
+            >
+
         </activity>
     </application>
 

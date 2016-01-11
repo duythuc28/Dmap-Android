@@ -4,27 +4,38 @@
 
     <ImageView
         android:id="@+id/guide_accessImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_centerVertical="true"
+        android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="15dp"/>
     <TextView
         android:id="@+id/guide_accessName"
         android:layout_toRightOf="@+id/guide_accessImage"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
         android:textColor="@color/iOS"
+        android:textSize="16sp"
         android:text="1312"/>
 
     <TextView
         android:id="@+id/guide_accessDes"
         android:layout_toRightOf="@+id/guide_accessImage"
         android:layout_below="@+id/guide_accessName"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
+        android:textSize="14sp"
+        android:text="dadsadsa"
         android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:id="@+id/measure_cell_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

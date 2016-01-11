@@ -40,18 +40,30 @@ public View getView(int position, View convertView, ViewGroup parent) {
         TextView textView = (TextView) rowView.findViewById(R.id.guide_accessName);
         TextView tView1 = (TextView)rowView.findViewById(R.id.guide_accessDes);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.guide_accessImage);
-        SharedPreferences preferences = context.getSharedPreferences("MyPref",context.MODE_PRIVATE);
-        boolean language = preferences.getBoolean("language", false);
-        if (language == true)
+
+        if (LanguageHelper.getInstance().getAppLanguage(this.context).equals(LanguageHelper.ENGLISH))
         {
             textView.setText(accessTypes.get(position).accessName_en);
+                String languageTranslated ;
+                if (textView.getText().equals("Toilet")) {
+                        languageTranslated = "Entrance > 80 cm\nSeat height 40 – 50 cm\nSink height from 40 to 80 cm.";
+                } else if (textView.getText().equals("Elevator")) {
+                        languageTranslated = "Door width > 90 cm\nDepth > 130 cm\nHeight of buttons from 90-120 cm.";
+                } else if (textView.getText().equals("Corridor/Pathway")) {
+                        languageTranslated = "Width > 120cm\nTurning area > 90 cm";
+                } else if (textView.getText().equals("Building entrance")) {
+                        languageTranslated = "Slopes < 15 degree\nSteps >= 1";
+                } else {
+                        languageTranslated = "Width > 90 cm\nHandle height: 80-100 cm\nWashbasin height: 40 – 80 cm.";
+                }
+                tView1.setText(languageTranslated);
         }
         else
         {
             textView.setText(accessTypes.get(position).accessName);
+                tView1.setText(accessTypes.get(position).accessDes);
         }
 
-        tView1.setText(accessTypes.get(position).accessDes);
         byte[] bytes = Base64.decode(accessTypes.get(position).Image, Base64.DEFAULT);
         Bitmap bmp = getBitmap(bytes);
         imageView.setImageBitmap(bmp);

@@ -30,14 +30,11 @@ public class AccessType {
 
     public ArrayList<AccessType> getAllData()
     {
-
         ArrayList<AccessType> data = new ArrayList<AccessType>();
 
         db = new DataHelper(mContext).openDataBase();
-        SharedPreferences preferences = mContext.getSharedPreferences("MyPref",mContext.MODE_PRIVATE);
-        boolean language = preferences.getBoolean("language", false);
         String query = "";
-        if (language == true)
+        if (LanguageHelper.getInstance().getAppLanguage(this.mContext).equals(LanguageHelper.ENGLISH))
         {
             query = "select * from AccessType order by accessName_en ASC";
         }
