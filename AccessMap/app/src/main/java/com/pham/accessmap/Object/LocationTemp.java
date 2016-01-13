@@ -34,7 +34,7 @@ public class LocationTemp {
         //int user = (isUser) ? 1:0;
         cv.put("isUser", (isUser)? 1:0);
         cv.put("locationType", location.locationType);
-        cv.put("userphone",location.userPhone);
+        cv.put("userphone","");
         db.insert("LocationTemp", null, cv);
         db.close();
     }

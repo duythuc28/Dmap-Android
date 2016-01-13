@@ -75,4 +75,15 @@ Established in 1991 as a not - for –profit institution, Hoa Sen University aim
     </string>
     <string name="title_activity_measure_accessibility">Measure Accessibility</string>
     <string name="measure_accessibility_button">Select</string>
+    <string name="add_location_dialog_userphone">Phone number</string>
+    <string name="add_location_dialog_password">Password</string>
+    <string name="add_location_dialog_contributor">Contributor</string>
+    <string name="add_location_dialog_admin">Administrator</string>
+    <string name="add_location_dialog_title">Authentication</string>
+    <string name="dialog_error_title">Error</string>
+    <string name="dialog_error_description">Please check your information</string>
+    <string name="dialog_cancel_button">Cancel</string>
+    <string name="dialog_shared_success">Your place is shared successfully</string>
+    <string name="dialog_delete_title">Delete</string>
+    <string name="dialog_delete_description">Are you sure you want to delete ?</string>
 </resources>

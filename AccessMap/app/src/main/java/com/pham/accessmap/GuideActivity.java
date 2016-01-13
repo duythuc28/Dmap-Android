@@ -22,8 +22,8 @@ public class GuideActivity extends ActionBarActivity {
         final ListView listview = (ListView) findViewById(R.id.list_guide);
         AccessType accessType = new AccessType(this);
         ArrayList<AccessType> data = accessType.getAllData();
-        Guide_AccessApdater adapter = new Guide_AccessApdater(this,data);
-        listview.setAdapter(adapter);
+//        Guide_AccessApdater adapter = new Guide_AccessApdater(this,data);
+//        listview.setAdapter(adapter);
     }
 
 

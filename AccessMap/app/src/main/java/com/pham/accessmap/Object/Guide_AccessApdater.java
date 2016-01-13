@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,24 +25,25 @@ import java.util.ArrayList;
 public class Guide_AccessApdater extends ArrayAdapter<AccessType> {
 private final Context context;
 private final ArrayList<AccessType> accessTypes;
+    private final ArrayList <Integer> mSelectedCell;
 
 
-public  Guide_AccessApdater (Context context , ArrayList<AccessType> accessTypes  )
-        {
+public  Guide_AccessApdater (Context context , ArrayList<AccessType> accessTypes, ArrayList <Integer> selectedCell  ) {
         super(context, R.layout.access_guidecell, accessTypes );
         this.context = context;
         this.accessTypes = accessTypes;
+        this.mSelectedCell = selectedCell;
         }
 
 @Override
-public View getView(int position, View convertView, ViewGroup parent) {
+public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.access_guidecell, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.guide_accessName);
         TextView tView1 = (TextView)rowView.findViewById(R.id.guide_accessDes);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.guide_accessImage);
-
+//        mListener = (CheckBoxCallBack) this;
         if (LanguageHelper.getInstance().getAppLanguage(this.context).equals(LanguageHelper.ENGLISH))
         {
             textView.setText(accessTypes.get(position).accessName_en);
@@ -64,6 +67,22 @@ public View getView(int position, View convertView, ViewGroup parent) {
                 tView1.setText(accessTypes.get(position).accessDes);
         }
 
+    CheckBox tCheckbox = (CheckBox)rowView.findViewById(R.id.measure_cell_checkbox);
+    if (this.mSelectedCell.size() > 0) {
+        if (mSelectedCell.contains(position)) {
+            tCheckbox.setChecked(true);
+        } else {
+            tCheckbox.setChecked(false);
+        }
+    }
+
+    tCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            mListener.onCheckedChangedListener(position , isChecked);
+        }
+    });
+
         byte[] bytes = Base64.decode(accessTypes.get(position).Image, Base64.DEFAULT);
         Bitmap bmp = getBitmap(bytes);
         imageView.setImageBitmap(bmp);
@@ -74,5 +93,11 @@ public View getView(int position, View convertView, ViewGroup parent) {
 public Bitmap getBitmap(byte[] bitmap) {
         return BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
         }
+
+    public interface CheckBoxCallBack {
+        void onCheckedChangedListener (int checkPosition , boolean isChecked);
+    }
+
+    public CheckBoxCallBack mListener;
 }
 

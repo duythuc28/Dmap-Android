@@ -76,5 +76,15 @@ Hoa Sen là trường đại học tư thục phi lợi nhuận được thành 
     </string>
     <string name="title_activity_measure_accessibility">Đo khả năng tiếp cận</string>
     <string name="measure_accessibility_button">Lựa chọn</string>
-
+    <string name="add_location_dialog_userphone">Số điện thoại</string>
+    <string name="add_location_dialog_password">Mật khẩu</string>
+    <string name="add_location_dialog_contributor">Người dùng</string>
+    <string name="add_location_dialog_admin">Quản lý</string>
+    <string name="add_location_dialog_title">Xác nhận thông tin</string>
+    <string name="dialog_error_title">Lỗi</string>
+    <string name="dialog_error_description">Kiểm tra lại thông tin nhập của bạn</string>
+    <string name="dialog_cancel_button">Huỷ</string>
+    <string name="dialog_shared_success">Bạn đã chia sẻ địa điểm thành công</string>
+    <string name="dialog_delete_title">Xoá</string>
+    <string name="dialog_delete_description">Bạn có chắc muốn xoá ?</string>
 </resources>

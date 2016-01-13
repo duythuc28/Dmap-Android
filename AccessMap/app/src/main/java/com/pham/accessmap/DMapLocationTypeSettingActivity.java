@@ -173,11 +173,11 @@ public class DMapLocationTypeSettingActivity extends ActionBarActivity {
                     locationType.uncheckLocationType(loctype.locationType_ID);
                 }
             }
-            Utils.setCheckOnAllPlaceTypes(mIsCheckedAll,this);
+            Utils.setCheckOnAllPlaceTypes(mIsCheckedAll, this);
             new AlertDialog.Builder(DMapLocationTypeSettingActivity.this)
                     .setTitle(R.string.alert_success_title)
-                    .setMessage(R.string.alert_save_data)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    .setMessage(getResources().getString(R.string.alert_save_data))
+                    .setPositiveButton(getString(R.string.alert_ok_title), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
 //                            restartActivity();
 

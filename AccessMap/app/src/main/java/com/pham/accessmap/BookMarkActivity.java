@@ -56,11 +56,11 @@ public class BookMarkActivity extends ActionBarActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder adb=new AlertDialog.Builder(BookMarkActivity.this);
-                adb.setTitle("Delete?");
-                adb.setMessage("Are you sure you want to delete ");
+                adb.setTitle(getResources().getString(R.string.dialog_delete_title));
+                adb.setMessage(getResources().getString(R.string.dialog_delete_description));
                 final int positionToRemove = position;
-                adb.setNegativeButton("Cancel", null);
-                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                adb.setNegativeButton(getResources().getString(R.string.dialog_cancel_button), null);
+                adb.setPositiveButton(getResources().getString(R.string.alert_ok_title), new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Log.v("data",String.valueOf(data.get(position).locationID));
                         location.removeBookmark(data.get(position).locationID);
