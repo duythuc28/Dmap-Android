@@ -3,7 +3,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  * Created by Pham on 25/12/2014.
  */
 public class Location {
-    public  String address, latitude, longitude, phone, location_title;
+    public  String address, latitude, longitude, phone, location_title , titleASCII , addressASCII;
     public  int locationID , isBookmark, locationType_ID_Ref;
 
     SQLiteDatabase db;
@@ -144,13 +146,43 @@ public class Location {
             cv.put("title", location.location_title);
             cv.put("isBookmark", 0);
             cv.put("locationType_ID_Ref", location.locationType_ID_Ref);
+        if (location_title.contains("Đ") ) {
+//            location_title = location_title.replace(location_title.substring(0,location_title.indexOf("Đ")),"D");
+//            location_title = location_title.replaceAll("\\p{}","D");
+            location_title = location_title.replace("Đ","D");
+        }
+
+        if (location_title.contains("đ")) {
+            location_title = location_title.replace("đ","d");
+        }
+
+        if (location.address.contains("Đ") ) {
+//            location_title = location_title.replace(location_title.substring(0,location_title.indexOf("Đ")),"D");
+//            location_title = location_title.replaceAll("\\p{}","D");
+            location.address = location.address.replace("Đ","D");
+        }
+
+        if (location.address.contains("đ")) {
+            location.address = location.address.replace("đ","d");
+        }
+
+
+        String asciiTitle = Normalizer.normalize(location_title, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
+        cv.put("title_ASCII",asciiTitle);
+        Log.e("title", asciiTitle);
+
+        String addressAscii = Normalizer.normalize(location.address, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
+        cv.put("address_ASCII",addressAscii);
+        Log.e("address", addressAscii);
+
             db.insert("Location", null, cv);
         db.close();
     }
 
     public void editLocation (Location location)
     {
-
         db = new DataHelper(mContext).openDataBase();
         ContentValues cv = new ContentValues();
         //cv.put("locationID", location.locationID);
@@ -272,7 +304,7 @@ public class Location {
         try {
             db = new DataHelper(mContext).openDataBase();
             String newText = ("%"+text+"%");
-            String query = "select * from Location where address like '"+ newText +"' or title like '" + newText + "' order by title ASC";
+            String query = "select * from Location where address_ASCII like '"+ newText +"' or title_ASCII like '" + newText + "' order by title COLLATE UNICODE ASC";
             Cursor cursor = db.rawQuery(query, null);
             while (cursor.moveToNext())
             {
